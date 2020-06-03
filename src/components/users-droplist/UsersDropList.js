@@ -14,10 +14,11 @@ export class UsersDropList extends Component {
 
         return (
             <div className='d-flex w-100 h-100 flex-wrap users-droplist'>
+                {/*<UserForm/>*/}
             {
                 users.map((user) => {
                     return(
-                    <UserPost username={user.username} street={user.address.street} key={user.id}/>)
+                    <UserPost usr={user} key={user.id}/>)
                 })
             }
             </div>
