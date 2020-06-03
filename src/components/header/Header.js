@@ -2,8 +2,6 @@ import React from "react";
 import './Header.scss';
 
 export function Header (props) {
-    const {} = props;
-
     return (
         <div className='container-fluid header-site'>
             <div className='children logo'>
@@ -13,7 +11,7 @@ export function Header (props) {
             </div>
             <div className='children counter'>
                 <div>
-                    {/*<Counter/>*/}
+                    <h4>{props.count}</h4>
                 </div>
             </div>
         </div>
