@@ -2,12 +2,13 @@ import React from "react";
 import './UserPost.scss';
 
 export function UserPost (props) {
-    const {usr, updateDate} = props;
+    const {usr} = props;
 
-// let update = () => {
-//     console.log ('ok');
-//     updateDate(1);
-// };
+    const user = {
+        username: usr.username,
+        name: usr.name,
+        email: usr.email
+    };
 
     return (
         <div className='user-post d-flex align-items-center' id={usr.key}>
@@ -18,8 +19,11 @@ export function UserPost (props) {
                 <br/>
                 <p>{usr.email}</p>
             </label>
-            <button className='btn btn-primary'>+</button>
-            {/*<button></button>*/}
+            <button onClick={() => {
+                console.log (user);
+                console.log ('+1');
+                props.updateData(1, user);
+            }}>+</button>
         </div>
     )
 

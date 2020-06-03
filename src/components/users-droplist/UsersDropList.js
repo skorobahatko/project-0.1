@@ -11,13 +11,6 @@ export class UsersDropList extends Component {
         }
     }
 
-    // Count = (value) => {
-    //     let valueOfCount = this.state.count;
-    //     valueOfCount += value;
-    //     this.setState({
-    //         count: valueOfCount
-    //   })
-    // };
 
     render() {
         const {users, updateData} = this.props;
@@ -28,14 +21,10 @@ export class UsersDropList extends Component {
             {
                 users.map((user) => {
                     return(
-                    <UserPost usr={user} key={user.id}/>
+                    <UserPost usr={user} key={user.id} updateData={updateData}/>
                     )
                 })
             }
-            <button onClick={() => {
-                console.log (this.state.count);
-                this.props.updateData(this.state.count);
-            }}>+</button>
             </div>
         );
     }
