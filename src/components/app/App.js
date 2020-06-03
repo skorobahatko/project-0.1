@@ -3,6 +3,7 @@ import './App.css';
 import {UsersDropList} from '../users-droplist/UsersDropList';
 import {users} from "../../json-placeholder/UsersConstants";
 import {Header} from "../header/Header";
+import uniqueId from 'uniqid';
 
 
 class App extends Component {
@@ -12,7 +13,8 @@ class App extends Component {
 
         this.state = {
             count: 0,
-            userList: []
+            userList: [],
+            users: [...users]
         };
     }
 
@@ -32,6 +34,18 @@ class App extends Component {
         });
         console.log (this.state.userList);
     };
+    createNewUser = (username, name, email) => {
+        const newUsers  = {
+            username:username,
+            name: name,
+            email: email,
+        };
+        this.setState((prevState) => {
+            return {
+                users: [{ ...newUsers, id: uniqueId()}, ...prevState.users]
+            }})
+
+    };
 
 
     render() {
@@ -39,7 +53,7 @@ class App extends Component {
 
         return (<div className="App">
                 <Header count={this.state.count}/>
-                <UsersDropList users={users} updateData={this.updateCounter}/>
+                <UsersDropList users={this.state.users} updateData={this.updateCounter} newUser={this.createNewUser}/>
             </div>);
     }
 }
