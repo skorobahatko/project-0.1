@@ -5,20 +5,18 @@ export function UserPost (props) {
     const {usr, updateData, onEdit, afterEdit} = props;
 
     const user = {
-        username: usr.username,
-        name: usr.name,
+        lastName: usr.last_name,
+        name: usr.first_name,
         email: usr.email,
         id: usr.id
     };
 
     return (
-        <div className='user-post d-flex align-items-center' id={usr.key}>
+        <div className='user-post d-flex align-items-center' id={user.key}>
             <label htmlFor="post">
-                <h3>{usr.username}</h3>
+                <h3>{user.name} {user.lastName}</h3>
                 <br/>
-                <p>{usr.name}</p>
-                <br/>
-                <p>{usr.email}</p>
+                <p>{user.email}</p>
             </label>
             <button onClick={() => {
                 console.log ('+1');

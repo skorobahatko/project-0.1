@@ -7,10 +7,10 @@ export class UserForm extends Component {
 
         this.state = {
             error: '',
-            isEdit: false,
-            editedUser: {}
+            editedUser: this.props.editUser,
+            isEdit: !!this.props.editUser
         }
-    }
+    };
 
     usernameRef = createRef();
     nameRef = createRef();
@@ -43,12 +43,16 @@ export class UserForm extends Component {
         this.nameRef.current.value = '';
         this.emailRef.current.value = '';
     };
-    onEdit = () => {
-        const {editUser} = this.props;
+
+
+
+    onEdit = (user) => {
+        const {editedUser} = this.props;
         this.setState({
             isEdit: true,
-            editUser: editUser
+            editUser: editedUser
         });
+        console.log (editedUser);
 
     };
 
@@ -87,8 +91,8 @@ export class UserForm extends Component {
                         placeholder="Example input"
                     />
                 </div>
-                <button type='submit'> add </button>
-                {this.state.isEdit && <button onClick={this.onEdit}> edit </button>}
+                {!this.state.isEdit ? <button type='submit'> add </button> : <button onClick={this.onEdit}> edit </button>}
+
             </form>
         );
     }
