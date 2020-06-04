@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import './App.css';
-import {UsersDropList} from '../users-droplist/UsersDropList';
 import {users} from "../../json-placeholder/UsersConstants";
 import {Header} from "../header/Header";
 import uniqueId from 'uniqid';
+import {UserForm} from "../user-form/UserForm";
+import {UserPost} from "../userPost/UserPost";
 
 
 class App extends Component {
@@ -14,7 +15,8 @@ class App extends Component {
         this.state = {
             count: 0,
             userList: [],
-            users: [...users]
+            users: [...users],
+            editedUser:{}
         };
     }
 
@@ -34,6 +36,7 @@ class App extends Component {
         });
         console.log (this.state.userList);
     };
+
     createNewUser = (username, name, email) => {
         const newUsers  = {
             username:username,
@@ -44,17 +47,28 @@ class App extends Component {
             return {
                 users: [{ ...newUsers, id: uniqueId()}, ...prevState.users]
             }})
-
     };
-
+    editUser = (user) => {
+        this.setState({
+            editedUser: user
+        })
+    };
 
     render() {
 
-
         return (<div className="App">
                 <Header count={this.state.count}/>
-                <UsersDropList users={this.state.users} updateData={this.updateCounter} newUser={this.createNewUser}/>
-            </div>);
+                    <div className='d-flex w-100 h-100 flex-wrap users-droplist'>
+                        <UserForm newUser={this.createNewUser} editUser={this.state.editedUser}/>
+                        {
+                            this.state.users.map((user) => {
+                                return(
+                                     <UserPost usr={user} key={user.id} updateData={this.updateCounter} onEdit={this.editUser}/>
+                               )
+                            })
+                        }
+                    </div>
+                </div>);
     }
 }
 

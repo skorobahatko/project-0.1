@@ -6,7 +6,9 @@ export class UserForm extends Component {
         super (props);
 
         this.state = {
-            error: ''
+            error: '',
+            isEdit: false,
+            editedUser: {}
         }
     }
 
@@ -25,9 +27,10 @@ export class UserForm extends Component {
         if (!username.trim() || !name.trim() || !email.trim() ) {
             this.setState({
                 error: 'u must fill all inputs!'
-            })
+            });
             return;
         }
+
         newUser(username, name, email);
 
         this.onReset();
@@ -39,6 +42,14 @@ export class UserForm extends Component {
         this.usernameRef.current.value = '';
         this.nameRef.current.value = '';
         this.emailRef.current.value = '';
+    };
+    onEdit = () => {
+        const {editUser} = this.props;
+        this.setState({
+            isEdit: true,
+            editUser: editUser
+        });
+
     };
 
 
@@ -77,6 +88,7 @@ export class UserForm extends Component {
                     />
                 </div>
                 <button type='submit'> add </button>
+                {this.state.isEdit && <button onClick={this.onEdit}> edit </button>}
             </form>
         );
     }

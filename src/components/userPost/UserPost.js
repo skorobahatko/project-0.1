@@ -2,12 +2,13 @@ import React from "react";
 import './UserPost.scss';
 
 export function UserPost (props) {
-    const {usr} = props;
+    const {usr, updateData, onEdit, afterEdit} = props;
 
     const user = {
         username: usr.username,
         name: usr.name,
-        email: usr.email
+        email: usr.email,
+        id: usr.id
     };
 
     return (
@@ -20,10 +21,13 @@ export function UserPost (props) {
                 <p>{usr.email}</p>
             </label>
             <button onClick={() => {
-                console.log (user);
                 console.log ('+1');
-                props.updateData(1, user);
-            }}>+</button>
+                updateData(1, user);
+            }}>choose</button>
+            <button onClick={() => {
+                console.log (user);
+                onEdit(user);
+            }}>edit</button>
         </div>
     )
 
